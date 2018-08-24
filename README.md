@@ -19,9 +19,19 @@ To install the client library, use the following command:
 
 **Notes Before Use**
 
-You must replace ADD_API_KEY with your personal API key in the script on line 2.
+1. You must replace ADD_API_KEY with your personal API key in sendRequests.js on line 2.
 
-Ensure that the relative file path on line 3 of the script is correct.
+2. Ensure that the relative file path on line 3 of sendRequests.js is correct.
+
+3. This script assumes the CSV provided has the following data for each request, and will not run any requests with incomplete data.
+```
+callback_url
+attachment
+attachment_type
+objects_to_annotate
+instruction
+with_labels
+ ```
 
 **To Run:**
 
