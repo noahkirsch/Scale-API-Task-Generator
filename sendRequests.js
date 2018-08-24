@@ -21,7 +21,7 @@ lineReader.on('close', () => {
 
 let parseData = (data) => {
   for (let i = 1; i < data.length; i++) {
-    //  Rest to see if data row is incomplete
+    //  Test to see if data row is incomplete
     if (data[i].length === data[0].length) {
       let newEntry = {};
 
@@ -39,9 +39,8 @@ let parseData = (data) => {
   }
 };
 
-let makeRequests = (csvObject) => {
+let makeRequests = (requests) => {
 	requests.forEach((requestData) => {
-
     let instructions = requestData.instruction;
     let objects = requestData.objects_to_annotate.split(',');
 
