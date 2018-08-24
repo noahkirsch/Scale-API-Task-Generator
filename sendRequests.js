@@ -27,7 +27,13 @@ let parseData = (csvData) => {
 			var newEntry = {};
 
 			csvData[0].forEach((item, index) => {
+				//Remove double quotes from the string of objects to annotate
+				if (index === 3) {
+					let cleanString = csvData[i][index].replace(/"/g, '');
+					newEntry[item] = cleanString;
+				} else {
 					newEntry[item] = csvData[i][index];
+				}
 			});
 			requests.push(newEntry);
 		}
