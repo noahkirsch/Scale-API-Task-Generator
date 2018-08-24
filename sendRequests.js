@@ -40,7 +40,7 @@ let parseData = (data) => {
 };
 
 let makeRequests = (requests) => {
-	requests.forEach((requestData) => {
+  requests.forEach((requestData) => {
     let instructions = requestData.instruction;
     let objects = requestData.objects_to_annotate.split(',');
 
