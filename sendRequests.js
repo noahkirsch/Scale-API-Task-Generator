@@ -10,7 +10,7 @@ const lineReader = require('readline').createInterface({
 });
 
 lineReader.on('line', (line) => {
-  // Splits csv row into each seperate data points, handling commas within double quotes
+  // Splits csv row into each seperate data point, handling commas within double quotes
   csvData.push(line.match(/(".*?"|[^\s",][^",]+[^\s",])(?=\s*,|\s*$)/g));
 });
 
