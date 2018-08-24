@@ -13,3 +13,23 @@ lineReader.on('line', (line) => {
 	//Splits csv row into each seperate data points, handling commas within double quotes
   csvData.push(line.match(/(".*?"|[^\s",][^",]+[^\s",])(?=\s*,|\s*$)/g));
 });
+
+lineReader.on('close', () => {
+	parseData(csvData);
+});
+
+let parseData = (csvData) => {
+	for (let i = 1; i < csvData.length; i++) {
+		//Rest to see if data row is incomplete
+		if (csvData[i].length !== csvData[0].length) {
+			continue;
+		} else {
+			var newEntry = {};
+
+			csvData[0].forEach((item, index) => {
+					newEntry[item] = csvData[i][index];
+			});
+			requests.push(newEntry);
+		}
+	}
+};
