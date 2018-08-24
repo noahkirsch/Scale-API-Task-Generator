@@ -16,6 +16,7 @@ lineReader.on('line', (line) => {
 
 lineReader.on('close', () => {
 	parseData(csvData);
+	makeRequests(requests);
 });
 
 let parseData = (csvData) => {
@@ -38,4 +39,30 @@ let parseData = (csvData) => {
 			requests.push(newEntry);
 		}
 	}
+};
+
+let makeRequests = (csvObject) => {
+	requests.forEach((requestData) => {
+
+		let instructions = requestData.instruction;
+		let objects = requestData.objects_to_annotate.split(',');
+
+		//Formats instructions to include markdown formatting around objects to format
+		objects.forEach((word) => {
+			instructions = instructions.replace(word, '**' + word + '**');
+		});
+
+		client.createAnnotationTask({
+		  'callback_url': requestData.callback_url,
+		  'instruction': instructions,
+		  'attachment_type': requestData.attachment_type,
+		  'attachment': requestData.attachment,
+		  'objects_to_annotate': requestData.objects_to_annotate.split(','),
+		  'with_labels': requestData.with_labels === 'TRUE',
+		  'min_width': '30',
+		  'min_height': '30'
+		}, (err, task) => {
+		    console.log(task);
+		});
+	});
 };
